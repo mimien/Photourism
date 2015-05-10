@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+
+# Map
+GET     /world                      controllers.MapController.index
+GET     /selectPoint                controllers.MapController.addPoint
+POST    /save                       controllers.MapController.savePoint
+
+# Photos
+GET     /add                        controllers.PhotosController.add(marker: String)
+
+# Javascript Routes
+GET     /javascriptRoutes           controllers.JavascriptRoute.javascriptRoutes
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

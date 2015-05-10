@@ -1,0 +1,25 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@title</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+
+    <!-- jQuery -->
+    <script src="@routes.Assets.at("javascripts/jquery.js")"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRBbfTNcPKlIi8CW9ec1-IfVaU97xpL9c&sensor=true">
+    </script>
+    <script type="text/javascript" src="@routes.JavascriptRoute.javascriptRoutes"></script>
+    <style>
+        html { height: 100% }
+        body { height: 100%; margin: 0; padding: 0 }
+        #map-canvas { height: 100% }
+    </style>
+</head>
+<body>
+@content
+</body>
