@@ -1,6 +1,6 @@
 package controllers
 
-import models.User
+import models.{Users, User}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller, Security}
@@ -18,12 +18,10 @@ object UsersController extends Controller {
       "passwords" -> tuple(
         "password" -> nonEmptyText(6),
         "repassword" -> nonEmptyText(6)
-      ).verifying(// Add an additional constraint: both passwords must match
+      ).verifying( // Add an additional constraint: both passwords must match
           "Passwords don't match", data => {
-        println(data._1 + " " + data._2)
         data._1 == data._2
-      }
-        ),
+      }),
       "bio" -> text(0, 100)
     )(User.apply)(User.unapply)
   )
@@ -34,16 +32,12 @@ object UsersController extends Controller {
 
   def save = Action { implicit request =>
     userForm.bindFromRequest.fold(
-      formWithErrors => {
-//        println(formWithErrors("email").error.map {
-//          error => error.me
-//        })
-        println(formWithErrors.errorsAsJson)
-        BadRequest(views.html.users.signup(formWithErrors)
-          (request2flash(request) + ("error", "Please correct errors above.")))
+      formWithErrors => BadRequest(views.html.users.signup(formWithErrors)
+        (request2flash(request) +("error", "Please correct errors above."))),
+      user => {
+        Users.add(user)
+        Redirect(routes.Application.index).withSession(Security.username -> user.email)
       }
-      ,
-      user => Redirect(routes.Application.index).withSession(Security.username -> user.email)
     )
   }
 }

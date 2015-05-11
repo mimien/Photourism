@@ -3,6 +3,17 @@
 @import helper._
 
 @main("Sign up") {
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <!--  Display three horizontal lines when navbar collapsed. -->
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Photourism</a>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="well">
         @form(routes.UsersController.save(), 'class -> "form-horizontal") {

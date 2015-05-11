@@ -1,6 +1,6 @@
 @(userForm: Form[User])
 
-@import views.html.input._
+@import views.html.input.signup._
 
 
 <fieldset>
@@ -34,7 +34,7 @@
     help = "Must be the same password as the one above (required)")
 
     <!-- Bio -->
-    @txtarea(userForm("bio"),
+    @textarea(userForm("bio"),
     label = "Bio",
     placeholder = "",
     help = "Optional")
@@ -43,7 +43,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
-            <button id="cancel" class="btn cancel">Cancel</button>
+            <!--<button id="cancel" class="btn cancel">Cancel</button>-->
         </div>
     </div>
 </fieldset>

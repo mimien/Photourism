@@ -9,16 +9,17 @@ GET     /                           controllers.Application.index
 # Map
 GET     /world                      controllers.MapController.index
 GET     /selectPoint                controllers.MapController.addPoint
-POST    /save                       controllers.MapController.savePoint
+POST    /savePoint                  controllers.MapController.savePoint
 
 # Photos
 GET     /add                        controllers.PhotosController.add(marker: String)
 
 # Users
 GET     /signup                     controllers.UsersController.signup
-POST    /signup                     controllers.UsersController.save
+POST    /saveUser                   controllers.UsersController.save
 GET     /login                      controllers.Auth.login
 GET     /logout                      controllers.Auth.logout
+POST     /auth                       controllers.Auth.authenticate
 
 # Javascript Routes
 GET     /javascriptRoutes           controllers.JavascriptRoute.javascriptRoutes

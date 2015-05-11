@@ -18,16 +18,23 @@ object Auth extends Controller {
     tuple(
       "email" -> email,
       "password" -> nonEmptyText
-    ) verifying("Invalid password or user name", data => check(data._1, data._2))
+    ) verifying("Invalid password or email", data => check(data._1, data._2))
   )
 
   val loginHtml = views.html.users.login(loginForm) // value used on Application controller
 
   def check(email: String, password: String) = {
-    val dbPassword = Users.find(email)
+    val dbPassword = Users.findPassword(email)
+    if (dbPassword.isEmpty) false
     // compare hashed password form with database hashed password
-    if (password.bcrypt hash= dbPassword) true
-    else false
+    else if (password.bcrypt hash= dbPassword.get) {
+      println("hola")
+      true
+    }
+    else {
+      println("falso")
+      false
+    }
   }
 
   def login = Action {
