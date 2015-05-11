@@ -11,13 +11,22 @@
     <!-- jQuery -->
     <script src="@routes.Assets.at("javascripts/jquery.js")"></script>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRBbfTNcPKlIi8CW9ec1-IfVaU97xpL9c&sensor=true">
+        <!-- Bootstrap Core CSS -->
+        <link href="@routes.Assets.at("stylesheets/bootstrap.min.css")" rel="stylesheet">
+        <!-- Bootstrap Core JavaScript -->
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,drawing&sensor=false">
+    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRBbfTNcPKlIi8CW9ec1-IfVaU97xpL9c&sensor=true">-->
     </script>
     <script type="text/javascript" src="@routes.JavascriptRoute.javascriptRoutes"></script>
     <style>
         html { height: 100% }
-        body { height: 100%; margin: 0; padding: 0 }
+        body { height: 100%; margin: 0px; padding: 0px }
         #map-canvas { height: 100% }
+        #map-canvas img {
+        max-width: none;
+        }
     </style>
 </head>
 <body>

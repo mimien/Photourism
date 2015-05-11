@@ -3,6 +3,7 @@ package models
 import java.sql.DriverManager
 import com.roundeights.hasher.Implicits._
 import scala.language.postfixOps
+
 /**
  * @author emiliocornejo
  * @version 01/05/15
@@ -13,12 +14,11 @@ case class User(name: String, email: String, passwords: (String, String), bio: S
 
 object Users {
   val db = DriverManager.getConnection("jdbc:postgresql://localhost/Photourism")
-
   val st = db.createStatement()
 
   def findPassword(email: String): Option[String] = {
-//    SELECT password from "User" where email = 'emiliocornejo2@gmail.com';
-    val query = st.executeQuery("SELECT password from \"User\" where email = '" + email  +"';")
+    //    SELECT password from "User" where email = 'emiliocornejo2@gmail.com';
+    val query = st.executeQuery("SELECT password from \"User\" where email = '" + email + "';")
     if (!query.next()) None
     else Some(query.getString(1))
   }

@@ -1,0 +1,26 @@
+@(userForm: Form[Photo])(implicit req: RequestHeader)
+
+@import helper._
+@import views.html.input.submit._
+
+@form(routes.PhotosController.add(), 'class -> "form-horizontal save-form") {
+<legend>Add Photo</legend>
+<fieldset>
+    <div class="control-group">
+        <label class="control-label" for="path">Name</label>
+        <div class="controls">
+            @text(userForm("path"), label = "Path", placeholder = "Where ")
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="place">What is this?</label>
+        <div class="controls">
+            @text(userForm("place"), label =  "Place", placeholder = "What is in the photo?")
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save me</button>
+    </div>
+</fieldset>
+}

@@ -5,6 +5,7 @@ import play.api.Routes
 import play.api.mvc.{Action, EssentialAction, Controller}
 import play.core.Router.JavascriptReverseRoute
 import routes.javascript.MapController._
+import routes.javascript.PhotosController.add
 
 /**
  * @author emiliocornejo
@@ -13,7 +14,7 @@ import routes.javascript.MapController._
  */
 object JavascriptRoute extends Controller{
   /* Application related JavascriptReverse Route will goes here */
-  val appRoutes: List[JavascriptReverseRoute] = List(index, savePoint)
+  val appRoutes: List[JavascriptReverseRoute] = List(index, savePoint, add)
 
   /* All JavascriptReverse Route will combine here */
   val javascriptRouters = appRoutes

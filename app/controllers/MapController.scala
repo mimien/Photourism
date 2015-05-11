@@ -1,7 +1,8 @@
 package controllers
 
-import controllers.Application._
-import controllers.routes
+import models.{Photo, Photos}
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
 
 /**
@@ -10,18 +11,24 @@ import play.api.mvc.{Action, Controller}
  *          @(#)MapController.scala
  */
 object MapController extends Controller {
+  val photoForm = Form(
+    mapping(
+      "path" -> nonEmptyText,
+      "place" -> nonEmptyText
+    )(Photo.apply)(Photo.unapply)
+  )
   def index = Action {
     Ok(views.html.map.index())
   }
   def addPoint = Action { implicit request =>
-    Ok(views.html.map.addPoint())
+    Ok(views.html.map.addPoint(photoForm))
   }
 
   def savePoint = Action(parse.json) { implicit request =>
     (request.body \ "pt").asOpt[String].map { json =>
-      println("hola")
       println(json)
-      Redirect(routes.PhotosController.add(json))
+      Photos point_= json
+      Redirect(routes.PhotosController.addMarker(json))
     }.getOrElse {
       BadRequest("Missing parameter [name]")
     }

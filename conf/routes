@@ -12,7 +12,9 @@ GET     /selectPoint                controllers.MapController.addPoint
 POST    /savePoint                  controllers.MapController.savePoint
 
 # Photos
-GET     /add                        controllers.PhotosController.add(marker: String)
+GET     /addMarker                  controllers.PhotosController.addMarker(marker: String)
+GET     /add                        controllers.PhotosController.add
+POST    /save                       controllers.PhotosController.save
 
 # Users
 GET     /signup                     controllers.UsersController.signup
