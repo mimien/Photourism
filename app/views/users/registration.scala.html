@@ -1,4 +1,49 @@
-main("Registration") {
+@(userForm: Form[User])
+
+@import views.html.input._
 
 
-}
+<fieldset>
+    <!-- Header -->
+    <div id="legend">
+        <legend>Welcome to Photourism</legend>
+    </div>
+
+    <!-- Name -->
+    @text(userForm("name"),
+    label = "Name",
+    placeholder = "My Name",
+    help = "Please enter your first and last name. (required)")
+
+    <!-- Email -->
+    @text(userForm("email"),
+    label = "Email",
+    placeholder = "My email",
+    help = "Required")
+
+    <!-- Password -->
+    @password(userForm("passwords.password"),
+    label = "Password",
+    placeholder = "",
+    help = "Password must be six or more characters. (required)")
+
+    <!-- RePassword -->
+    @password(userForm("passwords.repassword"),
+    label = "Re-enter password",
+    placeholder = "",
+    help = "Must be the same password as the one above (required)")
+
+    <!-- Bio -->
+    @txtarea(userForm("bio"),
+    label = "Bio",
+    placeholder = "",
+    help = "Optional")
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+            <button id="cancel" class="btn cancel">Cancel</button>
+        </div>
+    </div>
+</fieldset>

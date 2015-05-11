@@ -14,6 +14,12 @@ POST    /save                       controllers.MapController.savePoint
 # Photos
 GET     /add                        controllers.PhotosController.add(marker: String)
 
+# Users
+GET     /signup                     controllers.UsersController.signup
+POST    /signup                     controllers.UsersController.save
+GET     /login                      controllers.Auth.login
+GET     /logout                      controllers.Auth.logout
+
 # Javascript Routes
 GET     /javascriptRoutes           controllers.JavascriptRoute.javascriptRoutes
 

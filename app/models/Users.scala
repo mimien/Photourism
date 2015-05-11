@@ -6,8 +6,8 @@ package models
  *          @(#)Users.scala
  */
 
-case class User(name: String, password: String, id: Option[Int] = None)
+case class User(name: String, email: String, passwords: (String, String), bio: String)
+
 object Users {
   def find(name: String): String = ???
-
 }

@@ -3,7 +3,7 @@ package controllers
 import models.{Users, User}
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{Security, Action, Controller}
 import com.roundeights.hasher.Implicits._
 import scala.language.postfixOps
 
@@ -15,17 +15,41 @@ import scala.language.postfixOps
 object Auth extends Controller {
 
   val loginForm = Form(
-    mapping(
-      "name" -> text,
-      "password" -> text,
-      "id" -> optional(number)
-    )(User.apply)(User.unapply)
-      verifying("Contraseña o nombre de usuario invalido", user => check(user.name, user.password))
+    tuple(
+      "email" -> email,
+      "password" -> nonEmptyText
+    ) verifying("Invalid password or user name", data => check(data._1, data._2))
   )
 
-  def check(name: String, password: String) = {
-    val dbPassword = Users.find(name)
+  val loginHtml = views.html.users.login(loginForm) // value used on Application controller
+
+  def check(email: String, password: String) = {
+    val dbPassword = Users.find(email)
+    // compare hashed password form with database hashed password
     if (password.bcrypt hash= dbPassword) true
     else false
+  }
+
+  def login = Action {
+    Ok(loginHtml)
+  }
+
+  def authenticate = Action { implicit request =>
+    loginForm.bindFromRequest.fold(
+      hasErrors = {
+        formWithErrors =>
+          BadRequest(views.html.users.login(formWithErrors))
+      },
+      success = {
+        user =>
+          Redirect(routes.Application.index).withSession(Security.username -> user._1)
+      }
+    )
+  }
+
+  def logout = Action {
+    Redirect(routes.Application.index()).withNewSession.flashing(
+      "success" -> "You are now logged out."
+    )
   }
 }

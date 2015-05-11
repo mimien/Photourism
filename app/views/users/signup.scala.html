@@ -1,0 +1,22 @@
+@(userForm: Form[User])(implicit flash: Flash)
+
+@import helper._
+
+@main("Sign up") {
+<div class="container">
+    <div class="well">
+        @form(routes.UsersController.save(), 'class -> "form-horizontal") {
+        @registration(userForm)
+        }
+    </div>
+
+    @if(!flash.isEmpty) {
+    <div class="well">
+        <div id="error-message" class="text-danger">
+            @flash.get("error")
+        </div>
+    </div>
+    }
+</div>
+
+}
