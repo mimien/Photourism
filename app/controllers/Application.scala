@@ -5,7 +5,6 @@ import Auth.loginHtml
 object Application extends Controller {
 
   def index = Action { implicit request =>
-
     request.session.get(Security.username).map { user =>
       Ok(views.html.map.index())
     }.getOrElse {

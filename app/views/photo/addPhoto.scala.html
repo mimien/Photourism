@@ -1,26 +1,46 @@
-@(userForm: Form[Photo])(implicit req: RequestHeader)
+@(userForm: Form[Photo], name: String)
 
 @import helper._
-@import views.html.input.submit._
-
-@form(routes.PhotosController.add(), 'class -> "form-horizontal save-form") {
-<legend>Add Photo</legend>
-<fieldset>
-    <div class="control-group">
-        <label class="control-label" for="path">Name</label>
-        <div class="controls">
-            @text(userForm("path"), label = "Path", placeholder = "Where ")
+@import views.html.input.signup._
+@main("Photo Preview"){
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <!--  Display three horizontal lines when navbar collapsed. -->
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Photourism</a>
+            </div>
         </div>
     </div>
-    <div class="control-group">
-        <label class="control-label" for="place">What is this?</label>
-        <div class="controls">
-            @text(userForm("place"), label =  "Place", placeholder = "What is in the photo?")
+    <div class="container">
+        <div class="well">
+        <img src="@routes.Assets.at("/images/pictures/" + name)"  alt="picture">
         </div>
-    </div>
+        <div class="well">
+        @form(routes.PhotosController.save(), 'class -> "form-horizontal save-form") {
+            <fieldset>
+                <legend>Add Photo</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        @inputText(userForm("path").copy(value=Some(name)))
+                    </div>
+                </div>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save me</button>
-    </div>
-</fieldset>
+                @text(userForm("place"), label = "Place", placeholder = "What is in the photo?")
+
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <!--<button id="cancel" class="btn cancel">Cancel</button>-->
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+            </div>
+        </div>
 }

@@ -1,6 +1,6 @@
 package controllers
 
-import models.{Users, User}
+import models.{User, Users}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller, Security}

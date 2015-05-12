@@ -21,10 +21,10 @@ object Users {
     val query = st.executeQuery("SELECT password from \"User\" where email = '" + email + "';")
     if (!query.next()) None
     else Some(query.getString(1))
+
   }
 
   def add(user: User): Unit = {
-    println(user.passwords._1)
     st.executeUpdate("INSERT into \"User\"(email, password, name, bio) " +
       "VALUES('" + user.email + "', '" + user.passwords._1.bcrypt.hex + "', '" + user.name + "', '" + user.bio + "');")
   }

@@ -17,7 +17,7 @@ object MapController extends Controller {
       "place" -> nonEmptyText
     )(Photo.apply)(Photo.unapply)
   )
-  def index = Action {
+  def index = Action { implicit request =>
     Ok(views.html.map.index())
   }
   def addPoint = Action { implicit request =>

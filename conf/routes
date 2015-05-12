@@ -13,8 +13,10 @@ POST    /savePoint                  controllers.MapController.savePoint
 
 # Photos
 GET     /addMarker                  controllers.PhotosController.addMarker(marker: String)
-GET     /add                        controllers.PhotosController.add
+GET     /add                        controllers.PhotosController.add(name: String)
 POST    /save                       controllers.PhotosController.save
+POST    /upload                       controllers.PhotosController.upload
+GET    /all                       controllers.PhotosController.all
 
 # Users
 GET     /signup                     controllers.UsersController.signup
